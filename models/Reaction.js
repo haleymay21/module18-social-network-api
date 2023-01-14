@@ -1,34 +1,31 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
+const moment = require('moment');
 
-const assignmentSchema = new Schema(
-  {
-    assignmentId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
+const reactionSchema = new Schema({
+    reactionId: {
+        type: Types.ObjectId,
+        default: new Types.ObjectId()
     },
-    assignmentName: {
-      type: String,
-      required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: 'Unnamed assignment',
+    reactionBody: {
+        type: String,
+        required: true,
+        maxLength: 280
     },
-    score: {
-      type: Number,
-      required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
+    username: {
+        type: String,
+        required: true
     },
     createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-  {
+        type: Date,
+        default: Date.now,
+        get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+    }
+},
+{
     toJSON: {
-      getters: true,
+        getters: true
     },
-    id: false,
-  }
-);
+    id: false
+});
 
-module.exports = assignmentSchema;
+module.exports = reactionSchema;
