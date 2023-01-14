@@ -1,20 +1,33 @@
-const router = require('express').Router();
+const router = require("express").Router();
+
+// Sets requirements
 const {
-  getCourses,
-  getSingleCourse,
-  createCourse,
-  updateCourse,
-  deleteCourse,
-} = require('../../controllers/user-controller.js');
+  getAllThoughts,
+  getThoughtsById,
+  createThoughts,
+  updateThoughts,
+  deleteThoughts,
+  addReaction,
+  deleteReaction,
+} = require("../../controllers/thought-controller");
 
-// /api/courses
-router.route('/').get(getCourses).post(createCourse);
+// directs to /api/thoughts for get request
+router.route("/").get(getAllThoughts);
 
-// /api/courses/:courseId
+// directs to /api/thoughts/:id for get, put, delete
 router
-  .route('/:courseId')
-  .get(getSingleCourse)
-  .put(updateCourse)
-  .delete(deleteCourse);
+  .route("/:thoughtsId")
+  .get(getThoughtsById)
+  .put(updateThoughts)
+  .delete(deleteThoughts);
+
+// directs to /api/thoughts/:userId for post
+router.route("/:userId").post(createThoughts);
+
+// directs to /api/thoughts/:thoughtId/reactions for post request
+router.route("/:thoughtsId/reactions").post(addReaction);
+
+// directs to /api/thoughts/:thoughtId/reactionId for delete request
+router.route("/:thoughtId/reactions/:reactionId").delete(deleteReaction);
 
 module.exports = router;
