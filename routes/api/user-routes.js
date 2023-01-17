@@ -1,23 +1,23 @@
-const router = require('express').Router();
+const router = require("express").Router();
+
+// Sets requirements
 const {
-  getStudents,
-  getSingleStudent,
-  createStudent,
-  deleteStudent,
-  addAssignment,
-  removeAssignment,
-} = require('../../controllers/thought-controller');
+  getAllUsers,
+  getUsersById,
+  createUsers,
+  updateUsers,
+  deleteUsers,
+  addFriend,
+  deleteFriend,
+} = require("../../controllers/user-controller");
 
-// /api/students
-router.route('/').get(getStudents).post(createStudent);
+// directs to /api/users for get and post request
+router.route("/").get(getAllUsers).post(createUsers);
 
-// /api/students/:studentId
-router.route('/:studentId').get(getSingleStudent).delete(deleteStudent);
+// directs to /api/users/:id for get, put, delete
+router.route("/:userId").get(getUsersById).put(updateUsers).delete(deleteUsers);
 
-// /api/students/:studentId/assignments
-router.route('/:studentId/assignments').post(addAssignment);
-
-// /api/students/:studentId/assignments/:assignmentId
-router.route('/:studentId/assignments/:assignmentId').delete(removeAssignment);
+// directs to /api/users/:userId/friends/:friendId for post, delete
+router.route("/:userId/friends/:friendId").post(addFriend).delete(deleteFriend);
 
 module.exports = router;

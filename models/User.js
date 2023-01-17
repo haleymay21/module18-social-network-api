@@ -12,7 +12,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      // use REGEX to validate correct email
+      // uses regex to validate email
       match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/],
     },
     thoughts: [
@@ -36,8 +36,7 @@ const userSchema = new Schema(
   }
 );
 
-// create the Users model using the Users Schema
+// creates Users model using Users Schema
 const User = model("User", userSchema);
 
-// export Users module
 module.exports = User;
