@@ -1,4 +1,4 @@
-# Challenge14-Tech-Blog
+# Challenge18-social-network-api
 
 ## Description
 
